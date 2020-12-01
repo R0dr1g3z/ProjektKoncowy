@@ -6,7 +6,6 @@ import lombok.ToString;
 import pl.coderslab.demo.Project.users.AppUser;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -19,7 +18,7 @@ public class Test {
 
     private String name;
     private String schoolSubject;
-    private LocalDate date;
+    private String date;
     private int rating;
     @ManyToOne
     private AppUser appUser;

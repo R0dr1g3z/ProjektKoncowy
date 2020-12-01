@@ -37,6 +37,9 @@ public class HomeController {
         AppUser entityUser = customUser.getAppUser();
         Set<Role> roles = entityUser.getRoles();
         for (Role role : roles) {
+            if (role.getName().equals("ROLE_STUDENT")) {
+                return "redirect:/student/homepage";
+            }
             if (role.getName().equals("ROLE_TEACHER")) {
                 return "redirect:/teacher/homepage";
             }

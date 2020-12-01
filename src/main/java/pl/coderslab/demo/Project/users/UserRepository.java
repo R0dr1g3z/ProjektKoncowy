@@ -24,7 +24,7 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
 
     AppUser deleteAppUserById(Long id);
 
-    List<AppUser> findAllBySchoolClasses(SchoolClass schoolClass);
+    List<AppUser> findAllBySchoolClassesAndRoles(SchoolClass schoolClass,Role role);
 
 
 

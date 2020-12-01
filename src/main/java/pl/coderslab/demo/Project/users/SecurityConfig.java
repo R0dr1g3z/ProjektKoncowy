@@ -29,8 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/teacher/**").hasRole("TEACHER")
                 .and().formLogin().loginPage("/login")
                 .failureUrl("/login?error=true").defaultSuccessUrl("/check",true)
-                .and().logout().logoutSuccessUrl("/")
+                .and().logout().logoutSuccessUrl("/login")
                 .permitAll()
-                .and().exceptionHandling().accessDeniedPage("/403");
+                .and().exceptionHandling().accessDeniedPage("/check");
     }
 }

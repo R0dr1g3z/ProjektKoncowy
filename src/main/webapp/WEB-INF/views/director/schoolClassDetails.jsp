@@ -15,7 +15,13 @@
 <h1>Klasa ${schoolClass.name}</h1>
 <a href="/director/homepage">Strona główna</a><br><br>
 <a href="/director/addStudentToClass/${schoolClass.name}">Dodaj ucznia do klasy</a><br><br>
+<a href="/director/addTeacherToClass/${schoolClass.name}">Dodaj nauczyciela do klasy</a><br><br>
 Wychowawca klasy: ${schoolClass.educator}<br><br>
+Lista wszystkich nauczycieli:<br><br>
+<c:forEach items="${Teachers}" var="teacher">
+    <c:out value="${teacher.fullName}"/>
+    <a href="/director/removeTeacherFromClass/${teacher.id}/${schoolClass.name}">Usuń z klasy</a><br>
+</c:forEach><br>
 Lista wszystkich uczniów:<br><br>
 <c:forEach items="${Students}" var="student">
     <c:out value="${student.fullName}"/>

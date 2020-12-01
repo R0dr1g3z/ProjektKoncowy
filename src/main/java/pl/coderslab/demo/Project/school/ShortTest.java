@@ -19,7 +19,7 @@ public class ShortTest {
 
     private String name;
     private String schoolSubject;
-    private LocalDate date;
+    private String date;
     private int rating;
     @ManyToOne
     private AppUser appUser;

@@ -1,11 +1,14 @@
 package pl.coderslab.demo.Project.Controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.demo.Project.school.*;
 import pl.coderslab.demo.Project.users.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -68,7 +71,10 @@ public class DirectorController {
     }
 
     @PostMapping("/createTeacher")
-    public String createTeacher(AppUser appUser) {
+    public String createTeacher(@Valid AppUser appUser, BindingResult result) {
+        if (result.hasErrors()){
+            return "createUser";
+        }
         userService.saveTeacher(appUser);
         return "redirect:/director/teachers";
     }
@@ -181,8 +187,12 @@ public class DirectorController {
     @RequestMapping("/schoolClassDetails/{name}")
     public String schoolClassDetails(@PathVariable String name, Model model) {
         SchoolClass schoolClass = schoolClassRepository.findByName(name);
-        List<AppUser> students = userRepository.findAllBySchoolClasses(schoolClass);
+        Role role_student = roleRepository.findByName("ROLE_STUDENT");
+        Role role_teacher = roleRepository.findByName("ROLE_TEACHER");
+        List<AppUser> students = userRepository.findAllBySchoolClassesAndRoles(schoolClass,role_student);
+        List<AppUser> teachers = userRepository.findAllBySchoolClassesAndRoles(schoolClass, role_teacher);
         model.addAttribute("Students", students);
+        model.addAttribute("Teachers",teachers);
         model.addAttribute("schoolClass", schoolClass);
         return "director/schoolClassDetails";
     }
@@ -196,6 +206,15 @@ public class DirectorController {
         model.addAttribute("schoolClass", schoolClass);
         return "director/addStudentToClass";
     }
+    @RequestMapping("addTeacherToClass/{name}")
+    public String addTeacherToClass(@PathVariable String name, Model model) {
+        SchoolClass schoolClass = schoolClassRepository.findByName(name);
+        Role role = roleRepository.findByName("ROLE_TEACHER");
+        List<AppUser> allByRoles = userRepository.findAllByRoles(role);
+        model.addAttribute("teachers", allByRoles);
+        model.addAttribute("schoolClass", schoolClass);
+        return "director/addTeacherToClass";
+    }
 
     @RequestMapping("addedStudentToClass/{username}/{name}")
     public String addedStudentToClass(@PathVariable String username, @PathVariable String name) {
@@ -205,9 +224,26 @@ public class DirectorController {
         userRepository.save(student);
         return "redirect:/director/addStudentToClass/" + name;
     }
+    @RequestMapping("addedTeacherToClass/{username}/{name}")
+    public String addedTeacherToClass(@PathVariable String username, @PathVariable String name) {
+        List<SchoolClass> schoolClass = schoolClassRepository.findAllByName(name);
+        AppUser teacher = userRepository.findByUsername(username);
+        List<SchoolClass> schoolClasses = teacher.getSchoolClasses();
+        for (SchoolClass schoolClass1:schoolClass){
+            schoolClasses.add(schoolClass1);
+        }
+        teacher.setSchoolClasses(schoolClasses);
+        userRepository.save(teacher);
+        return "redirect:/director/addTeacherToClass/" + name;
+    }
 
     @RequestMapping("removeStudentFromClass/{id}/{name}")
     public String removeStudentFromClass(@PathVariable Long id, @PathVariable String name) {
+        userRepository.deleteUserSchoolClass(id);
+        return "redirect:/director/schoolClassDetails/" + name;
+    }
+    @RequestMapping("removeTeacherFromClass/{id}/{name}")
+    public String removeTeacherFromClass(@PathVariable Long id, @PathVariable String name) {
         userRepository.deleteUserSchoolClass(id);
         return "redirect:/director/schoolClassDetails/" + name;
     }
