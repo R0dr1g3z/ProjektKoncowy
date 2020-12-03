@@ -27,6 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/student/**").hasRole("STUDENT")
                 .antMatchers("/teacher/**").hasRole("TEACHER")
+                .antMatchers("/owner/**").hasRole("OWNER")
+                .antMatchers("/director/**").hasRole("DIRECTOR")
                 .and().formLogin().loginPage("/login")
                 .failureUrl("/login?error=true").defaultSuccessUrl("/check",true)
                 .and().logout().logoutSuccessUrl("/login")
