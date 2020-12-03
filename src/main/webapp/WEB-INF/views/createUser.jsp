@@ -13,7 +13,7 @@
 </head>
 <body>
 <p>Tworzenie ${Role}</p>
-<form:form method="post" modelAttribute="AppUser">
+<form:form method="post" modelAttribute="appUser">
     <label>Login</label>
     <form:input path="username"/><br>
     <form:errors path="username"/>

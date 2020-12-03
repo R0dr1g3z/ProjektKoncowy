@@ -23,7 +23,10 @@
     <label>Data</label>
     <form:input path="date"/><br>
     <label>Przedmiot</label>
-    <form:input path="schoolSubject"/><br>
+    <form:select path="schoolSubject">
+        <form:option value="---">Wybierz przedmiot</form:option>
+        <form:options items="${schoolSubjects}"></form:options>
+    </form:select><br>
     <input type="submit" value="Dodaj ocenę"/>
 </form:form>
 </body>

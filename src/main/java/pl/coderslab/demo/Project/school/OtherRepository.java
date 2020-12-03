@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface OtherRepository extends JpaRepository<Other,Long> {
     List<Other> findAllByAppUser(AppUser appUser);
+    List<Other> findAllByAppUserAndSchoolSubject(AppUser appUser,String schoolSubject);
 }

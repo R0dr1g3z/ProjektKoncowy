@@ -9,6 +9,7 @@ import pl.coderslab.demo.Project.school.*;
 import pl.coderslab.demo.Project.users.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -186,5 +187,28 @@ public class TeacherController {
     public String editOther(Other other,@PathVariable String name){
         otherRepository.save(other);
         return "redirect:/teacher/schoolClassDetails/"+name;
+    }
+    @RequestMapping("removeTest/{idTest}/{idUser}/{name}")
+    public String removeTest(@PathVariable Long idTest, @PathVariable String name,@PathVariable Long idUser) {
+        testRepository.deleteById(idTest);
+        return "redirect:/teacher/studentRatings/" + idUser+"/"+name;
+    }
+    @ModelAttribute("schoolSubjects")
+    public List<String> schoolSubjects(){
+        List<String> subjects = new ArrayList<>();
+        subjects.add("Biologia");
+        subjects.add("Chemia");
+        subjects.add("Fizyka");
+        subjects.add("Geografia");
+        subjects.add("Historia");
+        subjects.add("Informatyka");
+        subjects.add("Język Angielski");
+        subjects.add("Język Polski");
+        subjects.add("Matematyka");
+        subjects.add("Muzyka");
+        subjects.add("Plastyka");
+        subjects.add("Religia");
+        subjects.add("WF");
+        return subjects;
     }
 }

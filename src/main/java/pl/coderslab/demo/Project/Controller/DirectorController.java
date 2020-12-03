@@ -65,14 +65,14 @@ public class DirectorController {
     @GetMapping("/createTeacher")
     public String createTeacher(Model model) {
         AppUser appUser = new AppUser();
-        model.addAttribute("AppUser", appUser);
+        model.addAttribute("appUser", appUser);
         model.addAttribute("Role", "Nauczyciela");
         return "createUser";
     }
 
     @PostMapping("/createTeacher")
     public String createTeacher(@Valid AppUser appUser, BindingResult result) {
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             return "createUser";
         }
         userService.saveTeacher(appUser);
@@ -140,11 +140,11 @@ public class DirectorController {
         List<ShortTest> shortTests = shortTestRepository.findAllByAppUser(appUser);
         List<Homework> homeworks = homeworkRepository.findAllByAppUser(appUser);
         List<Other> others = otherRepository.findAllByAppUser(appUser);
-        model.addAttribute("Student",appUser);
-        model.addAttribute("Tests",tests);
-        model.addAttribute("ShortTests",shortTests);
-        model.addAttribute("Homeworks",homeworks);
-        model.addAttribute("Others",others);
+        model.addAttribute("Student", appUser);
+        model.addAttribute("Tests", tests);
+        model.addAttribute("ShortTests", shortTests);
+        model.addAttribute("Homeworks", homeworks);
+        model.addAttribute("Others", others);
         return "director/allStudentRatings";
     }
 
@@ -189,10 +189,10 @@ public class DirectorController {
         SchoolClass schoolClass = schoolClassRepository.findByName(name);
         Role role_student = roleRepository.findByName("ROLE_STUDENT");
         Role role_teacher = roleRepository.findByName("ROLE_TEACHER");
-        List<AppUser> students = userRepository.findAllBySchoolClassesAndRoles(schoolClass,role_student);
+        List<AppUser> students = userRepository.findAllBySchoolClassesAndRoles(schoolClass, role_student);
         List<AppUser> teachers = userRepository.findAllBySchoolClassesAndRoles(schoolClass, role_teacher);
         model.addAttribute("Students", students);
-        model.addAttribute("Teachers",teachers);
+        model.addAttribute("Teachers", teachers);
         model.addAttribute("schoolClass", schoolClass);
         return "director/schoolClassDetails";
     }
@@ -206,6 +206,7 @@ public class DirectorController {
         model.addAttribute("schoolClass", schoolClass);
         return "director/addStudentToClass";
     }
+
     @RequestMapping("addTeacherToClass/{name}")
     public String addTeacherToClass(@PathVariable String name, Model model) {
         SchoolClass schoolClass = schoolClassRepository.findByName(name);
@@ -224,12 +225,13 @@ public class DirectorController {
         userRepository.save(student);
         return "redirect:/director/addStudentToClass/" + name;
     }
+
     @RequestMapping("addedTeacherToClass/{username}/{name}")
     public String addedTeacherToClass(@PathVariable String username, @PathVariable String name) {
         List<SchoolClass> schoolClass = schoolClassRepository.findAllByName(name);
         AppUser teacher = userRepository.findByUsername(username);
         List<SchoolClass> schoolClasses = teacher.getSchoolClasses();
-        for (SchoolClass schoolClass1:schoolClass){
+        for (SchoolClass schoolClass1 : schoolClass) {
             schoolClasses.add(schoolClass1);
         }
         teacher.setSchoolClasses(schoolClasses);
@@ -242,6 +244,7 @@ public class DirectorController {
         userRepository.deleteUserSchoolClass(id);
         return "redirect:/director/schoolClassDetails/" + name;
     }
+
     @RequestMapping("removeTeacherFromClass/{id}/{name}")
     public String removeTeacherFromClass(@PathVariable Long id, @PathVariable String name) {
         userRepository.deleteUserSchoolClass(id);
