@@ -1,6 +1,5 @@
 package pl.coderslab.demo.Project.users;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;

@@ -13,6 +13,7 @@
 </head>
 <body>
 <h1>Strona dla dyrektora</h1>
+<h2>Szkoła ${school.name}</h2>
 <a href="/director/teachers">Nauczyciele</a>
 <a href="/director/students">Uczniowie</a>
 <a href="/director/schoolClass">Klasy</a><br><br>

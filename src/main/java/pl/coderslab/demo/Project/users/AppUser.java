@@ -1,8 +1,6 @@
 package pl.coderslab.demo.Project.users;
 
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
-import org.springframework.security.core.userdetails.UserDetails;
 import pl.coderslab.demo.Project.school.*;
 
 import javax.persistence.*;

@@ -14,8 +14,8 @@
 <body>
 <h1>Klasa ${schoolClass.name}</h1>
 <a href="/director/homepage">Strona główna</a><br><br>
-<a href="/director/addStudentToClass/${schoolClass.name}">Dodaj ucznia do klasy</a><br><br>
-<a href="/director/addTeacherToClass/${schoolClass.name}">Dodaj nauczyciela do klasy</a><br><br>
+<a href="/director/addStudentToClass/${schoolClass.id}">Dodaj ucznia do klasy</a><br><br>
+<a href="/director/addTeacherToClass/${schoolClass.id}">Dodaj nauczyciela do klasy</a><br><br>
 Wychowawca klasy: ${schoolClass.educator}<br><br>
 Lista wszystkich nauczycieli:<br><br>
 <c:forEach items="${Teachers}" var="teacher">

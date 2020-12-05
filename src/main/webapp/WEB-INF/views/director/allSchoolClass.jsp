@@ -13,10 +13,10 @@
 </head>
 <body>
 <h1>Wszystkie klasy</h1>
-<c:forEach items="${SchoolClass}" var="schoolClass">
+<c:forEach items="${schoolClasses}" var="schoolClass">
     <c:out value="${schoolClass.name}"/>
-    <a href="/director/schoolClassDetails/${schoolClass.name}">Szczegóły klasy</a>
-    <a href="/director/editSchoolClass/${schoolClass.name}">Edytuj</a>
+    <a href="/director/schoolClassDetails/${schoolClass.id}">Szczegóły klasy</a>
+    <a href="/director/editSchoolClass/${schoolClass.id}">Edytuj</a>
     <a href="/director/removeSchoolClass/${schoolClass.id}">Usuń</a><br>
 </c:forEach>
 <br>

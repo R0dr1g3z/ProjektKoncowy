@@ -17,4 +17,7 @@ public interface SchoolClassRepository extends JpaRepository<SchoolClass, Long> 
     @Modifying
     @Query(value = "DELETE FROM user_school_classes WHERE school_classes_id = ?1",nativeQuery = true)
     void deleteAllStudentFromSchoolClass(Long id);
+    @Modifying
+    @Query(value = "DELETE FROM school_school_classes WHERE school_classes_id = ?1",nativeQuery = true)
+    void deleteSchoolClassSchool(Long id);
 }

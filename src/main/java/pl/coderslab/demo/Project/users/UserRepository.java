@@ -24,8 +24,7 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
 
     AppUser deleteAppUserById(Long id);
 
-    List<AppUser> findAllBySchoolClassesAndRoles(SchoolClass schoolClass,Role role);
-
+    List<AppUser> findAllBySchoolClassesAndRoles(SchoolClass schoolClass, Role role);
 
 
     @Modifying
@@ -35,5 +34,13 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
     @Modifying
     @Query(value = "DELETE FROM EndProject2.user_school_classes WHERE app_user_id = ?1", nativeQuery = true)
     void deleteUserSchoolClass(Long id);
+
+    @Modifying
+    @Query(value = "DELETE FROM EndProject2.school_students WHERE students_id = ?1", nativeQuery = true)
+    void deleteStudentSchool(Long id);
+
+    @Modifying
+    @Query(value = "DELETE FROM EndProject2.school_teachers WHERE teachers_id = ?1", nativeQuery = true)
+    void deleteTeacherSchool(Long id);
 }
 

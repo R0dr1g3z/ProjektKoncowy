@@ -14,10 +14,10 @@
 </head>
 <body>
 <h1>Dodawanie uczniów do klasy ${schoolClass.name}</h1>
-<a href="/director/schoolClassDetails/${schoolClass.name}">Wróć</a><br><br>
+<a href="/director/schoolClassDetails/${schoolClass.id}">Wróć</a><br><br>
 <c:forEach items="${students}" var="student">
     <c:out value="${student.fullName}"/>
-    <a href="/director/addedStudentToClass/${student.username}/${schoolClass.name}">DODAJ</a><br>
+    <a href="/director/addedStudentToClass/${student.username}/${schoolClass.id}">DODAJ</a><br>
 </c:forEach>
 </body>
 </html>

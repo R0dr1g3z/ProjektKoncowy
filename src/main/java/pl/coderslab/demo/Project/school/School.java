@@ -18,10 +18,13 @@ public class School {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
     @OneToOne
     private AppUser director;
     @OneToMany
     private List<AppUser> teachers;
     @OneToMany
     private List<AppUser> students;
+    @OneToMany
+    private List<SchoolClass> schoolClasses;
 }

@@ -14,7 +14,7 @@
 </head>
 <body>
 <h1>Dodawanie nauczycieli do klasy ${schoolClass.name}</h1>
-<a href="/director/schoolClassDetails/${schoolClass.name}">Wróć</a><br><br>
+<a href="/director/schoolClassDetails/${schoolClass.id}">Wróć</a><br><br>
 <c:forEach items="${teachers}" var="teacher">
     <c:out value="${teacher.fullName}"/>
     <a href="/director/addedTeacherToClass/${teacher.username}/${schoolClass.name}">DODAJ</a><br>
