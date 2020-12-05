@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
 @Data
 public class AppUser {
     @Id
