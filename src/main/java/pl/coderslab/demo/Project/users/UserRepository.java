@@ -28,19 +28,19 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
 
 
     @Modifying
-    @Query(value = "DELETE FROM EndProject2.app_user_roles WHERE app_user_id = ?1", nativeQuery = true)
+    @Query(value = "DELETE FROM public.app_user_roles WHERE app_user_id = ?1", nativeQuery = true)
     void deleteUserRole(Long id);
 
     @Modifying
-    @Query(value = "DELETE FROM EndProject2.app_user_school_classes WHERE app_user_id = ?1", nativeQuery = true)
+    @Query(value = "DELETE FROM public.app_user_school_classes WHERE app_user_id = ?1", nativeQuery = true)
     void deleteUserSchoolClass(Long id);
 
     @Modifying
-    @Query(value = "DELETE FROM EndProject2.school_students WHERE students_id = ?1", nativeQuery = true)
+    @Query(value = "DELETE FROM public.school_students WHERE students_id = ?1", nativeQuery = true)
     void deleteStudentSchool(Long id);
 
     @Modifying
-    @Query(value = "DELETE FROM EndProject2.school_teachers WHERE teachers_id = ?1", nativeQuery = true)
+    @Query(value = "DELETE FROM public.school_teachers WHERE teachers_id = ?1", nativeQuery = true)
     void deleteTeacherSchool(Long id);
 }
 
