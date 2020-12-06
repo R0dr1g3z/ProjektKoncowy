@@ -22,7 +22,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(){
-        return "redirect:/check";
+        return "redirect:/login";
     }
     @RequestMapping("/theme")
     public String theme() {
