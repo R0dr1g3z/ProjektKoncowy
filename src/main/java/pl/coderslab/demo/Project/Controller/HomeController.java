@@ -20,6 +20,10 @@ public class HomeController {
     }
 
 
+    @RequestMapping("/")
+    public String home(){
+        return "redirect:/check";
+    }
     @RequestMapping("/theme")
     public String theme() {
 
