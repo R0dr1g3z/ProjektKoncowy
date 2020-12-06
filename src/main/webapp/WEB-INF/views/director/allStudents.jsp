@@ -16,7 +16,7 @@
 <c:forEach items="${students}" var="student">
     <c:out value="${student.fullName}"/>
     <a href="/director/studentRatings/${student.id}">Oceny ucznia</a>
-    <a href="/director/editStudent/${student.username}">Edytuj</a>
+    <a href="/director/editStudent/${student.id}">Edytuj</a>
     <a href="/director/removeStudent/${student.id}">Usuń</a><br>
 </c:forEach>
 <br>

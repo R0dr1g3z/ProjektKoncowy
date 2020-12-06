@@ -13,6 +13,7 @@ import java.util.List;
 public interface SchoolClassRepository extends JpaRepository<SchoolClass, Long> {
     SchoolClass findByName(String name);
     List<SchoolClass> findAllByName(String name);
+    List<SchoolClass> findAllById(Long id);
 
     @Modifying
     @Query(value = "DELETE FROM user_school_classes WHERE school_classes_id = ?1",nativeQuery = true)

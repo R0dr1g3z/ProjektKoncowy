@@ -237,9 +237,9 @@ public class DirectorController {
         return "director/addStudentToClass";
     }
 
-    @RequestMapping("addTeacherToClass/{name}")
-    public String addTeacherToClass(@PathVariable String name, Model model) {
-        SchoolClass schoolClass = schoolClassRepository.findByName(name);
+    @RequestMapping("addTeacherToClass/{id}")
+    public String addTeacherToClass(@PathVariable Long id, Model model) {
+        SchoolClass schoolClass = schoolClassRepository.getOne(id);
         Role role = roleRepository.findByName("ROLE_TEACHER");
         List<AppUser> allByRoles = userRepository.findAllByRoles(role);
         model.addAttribute("teachers", allByRoles);
@@ -247,18 +247,20 @@ public class DirectorController {
         return "director/addTeacherToClass";
     }
 
-    @RequestMapping("addedStudentToClass/{username}/{name}")
-    public String addedStudentToClass(@PathVariable String username, @PathVariable String name) {
-        List<SchoolClass> schoolClass = schoolClassRepository.findAllByName(name);
+    @RequestMapping("addedStudentToClass/{username}/{id}")
+    public String addedStudentToClass(@PathVariable String username, @PathVariable Long id) {
+        List<SchoolClass> schoolClass = schoolClassRepository.findAllById(id);
+        SchoolClass one = schoolClassRepository.getOne(id);
         AppUser student = userRepository.findByUsername(username);
         student.setSchoolClasses(schoolClass);
         userRepository.save(student);
-        return "redirect:/director/addStudentToClass/" + name;
+        return "redirect:/director/addStudentToClass/" + one.getName();
     }
 
-    @RequestMapping("addedTeacherToClass/{username}/{name}")
-    public String addedTeacherToClass(@PathVariable String username, @PathVariable String name) {
-        List<SchoolClass> schoolClass = schoolClassRepository.findAllByName(name);
+    @RequestMapping("addedTeacherToClass/{username}/{id}")
+    public String addedTeacherToClass(@PathVariable String username, @PathVariable Long id) {
+        List<SchoolClass> schoolClass = schoolClassRepository.findAllById(id);
+        SchoolClass one = schoolClassRepository.getOne(id);
         AppUser teacher = userRepository.findByUsername(username);
         List<SchoolClass> schoolClasses = teacher.getSchoolClasses();
         for (SchoolClass schoolClass1 : schoolClass) {
@@ -266,18 +268,20 @@ public class DirectorController {
         }
         teacher.setSchoolClasses(schoolClasses);
         userRepository.save(teacher);
-        return "redirect:/director/addTeacherToClass/" + name;
+        return "redirect:/director/addTeacherToClass/" + one.getName();
     }
 
-    @RequestMapping("removeStudentFromClass/{id}/{name}")
-    public String removeStudentFromClass(@PathVariable Long id, @PathVariable String name) {
-        userRepository.deleteUserSchoolClass(id);
-        return "redirect:/director/schoolClassDetails/" + name;
+    @RequestMapping("removeStudentFromClass/{idStudent}/{idClass}")
+    public String removeStudentFromClass(@PathVariable Long idStudent, @PathVariable Long idClass) {
+        userRepository.deleteUserSchoolClass(idStudent);
+        SchoolClass one = schoolClassRepository.getOne(idClass);
+        return "redirect:/director/schoolClassDetails/" + one.getName();
     }
 
-    @RequestMapping("removeTeacherFromClass/{id}/{name}")
-    public String removeTeacherFromClass(@PathVariable Long id, @PathVariable String name) {
-        userRepository.deleteUserSchoolClass(id);
-        return "redirect:/director/schoolClassDetails/" + name;
+    @RequestMapping("removeTeacherFromClass/{idStudent}/{idClass}")
+    public String removeTeacherFromClass(@PathVariable Long idStudent, @PathVariable Long idClass) {
+        userRepository.deleteUserSchoolClass(idStudent);
+        SchoolClass one = schoolClassRepository.getOne(idClass);
+        return "redirect:/director/schoolClassDetails/" + one.getName();
     }
 }

@@ -17,7 +17,7 @@
 <a href="/director/schoolClassDetails/${schoolClass.id}">Wróć</a><br><br>
 <c:forEach items="${teachers}" var="teacher">
     <c:out value="${teacher.fullName}"/>
-    <a href="/director/addedTeacherToClass/${teacher.username}/${schoolClass.name}">DODAJ</a><br>
+    <a href="/director/addedTeacherToClass/${teacher.username}/${schoolClass.id}">DODAJ</a><br>
 </c:forEach>
 </body>
 </html>

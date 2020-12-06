@@ -20,12 +20,12 @@ Wychowawca klasy: ${schoolClass.educator}<br><br>
 Lista wszystkich nauczycieli:<br><br>
 <c:forEach items="${Teachers}" var="teacher">
     <c:out value="${teacher.fullName}"/>
-    <a href="/director/removeTeacherFromClass/${teacher.id}/${schoolClass.name}">Usuń z klasy</a><br>
+    <a href="/director/removeTeacherFromClass/${teacher.id}/${schoolClass.id}">Usuń z klasy</a><br>
 </c:forEach><br>
 Lista wszystkich uczniów:<br><br>
 <c:forEach items="${Students}" var="student">
     <c:out value="${student.fullName}"/>
-    <a href="/director/removeStudentFromClass/${student.id}/${schoolClass.name}">Usuń z klasy</a><br>
+    <a href="/director/removeStudentFromClass/${student.id}/${schoolClass.id}">Usuń z klasy</a><br>
 </c:forEach>
 </body>
 </html>
