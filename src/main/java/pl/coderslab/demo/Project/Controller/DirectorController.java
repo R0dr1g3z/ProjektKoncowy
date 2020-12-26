@@ -80,11 +80,20 @@ public class DirectorController {
     }
 
     @PostMapping("/createTeacher")
-    public String createTeacher(@Valid AppUser appUser, BindingResult result,@AuthenticationPrincipal CurrentUser currentUser) {
+    public String createTeacher(@Valid AppUser appUser, BindingResult result,@AuthenticationPrincipal CurrentUser currentUser,Model model) {
+        AppUser appUser1 = currentUser.getAppUser();
+        String username = appUser.getUsername();
+        List<AppUser> users = userRepository.findAll();
+        for (AppUser user:users){
+            String username1 = user.getUsername();
+            if (username.equals(username1)){
+                model.addAttribute("Role","Nauczyciela");
+                return "createUserErrorDuplicate";
+            }
+        }
         if (result.hasErrors()) {
             return "createUser";
         }
-        AppUser appUser1 = currentUser.getAppUser();
         School school = schoolRepository.findByDirector(appUser1);
         List<AppUser> teachers = school.getTeachers();
         teachers.add(appUser);
